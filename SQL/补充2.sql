@@ -1,0 +1,22 @@
+USE student
+GO
+ALTER TABLE 教学计划 ADD CONSTRAINT pk_kzx PRIMARY KEY
+(课程号,专业代码,专业学级);
+GO
+ALTER TABLE 系部 ADD CONSTRAINT uk_xbmz UNIQUE
+(系部名称);
+GO
+ALTER TABLE 专业 ADD CONSTRAINT CK_系部代码 CHECK 
+(shuruzhi in (01,02,03,04));
+GO
+ALTER TABLE 专业 ADD CONSTRAINT fk_zyxb FOREIGN KEY
+(系部代码) REFERENCES 专业(系部代码);
+GO
+CREATE TABLE 人事信息
+(教师编号 CHAR(9) CONSTRAINT pk_jsbh PRIMARY KEY,
+姓名 VARCHAR(8) CONSTRAINT pk_xm UNIQUE,
+性别 CHAR(8),
+出生日期 DATETIME CHECK(出生日期>'1950'),
+系部代码 char (2)  NOT NULL,
+联系电话 char (20),
+);
